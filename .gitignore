@@ -1,0 +1,94 @@
+# \file .gitignore
+# \author Taylor Siviter
+# \date March 2015
+# \brief Generic ignore rules for general projects.
+# \copyright Mozilla Public License, Version 2.0.
+# This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+# not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# -------------------------------------------------------------------------------------------- #
+
+# -------------------------------- #
+# Project Generatable Structure(s) #
+# -------------------------------- #
+
+bin/*
+build/*
+doc/*
+lib/*
+out/*
+
+# ----------------------------- #
+# Project Required Structure(s) #
+# ----------------------------- #
+
+!CMakeLists.txt
+!data/*
+!doc/Doxyfile
+!doc/mathjaxconfig.js
+!includes/*
+!inc/*
+!main/*
+!source/*
+!src/*
+!test/*
+
+# -------------------------------------------- #
+# Binaries, Compiled Objects and Library Files #
+# -------------------------------------------- #
+
+# General
+*.bin
+*.com
+*.exe
+
+# C/C++/C*/etc
+*.[oa]
+*.so
+*.dll
+
+# Java
+*.class
+
+# Python
+*.py[cod]
+
+# --------------------- #
+# Archives and Packages #
+# ----------------------#
+
+*.tar
+*.tar.*
+*.tz
+*.t[abglx]z
+*.tbz*
+*.zip
+*.rar
+*.7z
+*.gz
+*.apk
+*.deb
+*.jar
+*.pkg
+*.rpm
+*.iso
+
+# ------------------------------- #
+# Operating System Generated Mess #
+# ------------------------------- #
+
+Thumbs.db
+ehthumbs.db
+._*
+_*.db
+.Trashes
+.Spotlight-V100
+.DS_Store
+
+# ---------------------- #
+# Program Generated Mess #
+# ---------------------- #
+
+*.log
+*~
+*.swp
+*.kate-swp
