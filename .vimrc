@@ -2,6 +2,9 @@
 " \author Taylor Siviter
 " \date March 2015
 " \brief Personal Vim Configuration.
+" \copyright Mozilla Public License, Version 2.0.
+" This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+" not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 " -------------------------------------------------------------------------------------------- "
 
 " -------------------------- "
@@ -23,11 +26,8 @@ augroup END
 
 set nocompatible " Reset distribution clutter and any options set.
 filetype off " Temporarily turn off filetype detection.
-
-set rtp+=~/.vim/bundle/Vundle.vim
-
-" Start Vundle management shenanigans.
-call vundle#begin()
+set rtp+=~/.vim/bundle/Vundle.vim " Runtime path to Vundle.
+call vundle#begin() " Start Vundle management shenanigans.
 
 Plugin 'gmarik/Vundle.vim' " Vundle plug-in mangager.
 Plugin 'bling/vim-airline' " Status/tabline bar.
@@ -43,8 +43,7 @@ Plugin 'xolox/vim-misc' " Misc functions for xolox Vim plugins.
 Plugin 'xolox/vim-easytags' " Automated tag generation and syntax highlighting.
 Plugin 'majutsushi/tagbar' " Tagbar for a file
 
-" End Plugin management.
-call vundle#end()
+call vundle#end() " End Plugin management.
 
 " --------------------------- "
 " 1.1 "Introductory Settings" "

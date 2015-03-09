@@ -1,0 +1,38 @@
+# \file cpp.snippets
+# \author Taylor Siviter
+# \date February 2015
+# \copyright Mozilla Public License, Version 2.0.
+# This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+# not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# -------------------------------------------------------------------------------------------- #
+
+snippet #ifn "Auto header guards." bt
+#ifndef _${1:BASENAME}_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
+#define _$1_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
+
+$0
+
+#endif
+endsnippet
+
+snippet /*! "File heading information." bt
+/*!
+ * \file `!p snip.rv = fn`
+ * \author Taylor Siviter
+ * \version 0.01
+ * \date `date +%B" "%Y`
+ * \brief ${1:Insert a brief description.}
+ *
+ * ${2:Insert a more detailed description -- if needed.}
+ *
+ * \copyright Mozilla Public License, Version 2.0.
+ * This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+ * not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ **********************************************************************************************/
+
+$0
+endsnippet
+
+snippet ///< "Doxygen right-aligned sameline comments -- at column #64."
+`!p snip.rv = (64-int(vim.eval("virtcol('.')")))*' '+'///< '+t[0]`
+endsnippet
