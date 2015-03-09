@@ -35,17 +35,16 @@ else
 fi
 
 echo -e "Setup from repository: $blue$vimrc_repo_path$endf"
-#
-# # Check for the YouCompleteMe directory.
-# # May fail depending on environment -- see Valloric's installation notes on GitHub.
-# echo 'Finding the YouCompleteMe plugin...'
-# if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
-#   echo -e "Installing: $green$underline"YouCompleteMe"$endf"
-#   cd $HOME/.vim/bundle/YouCompleteMe
-#   ./install.sh --clang-completer
-# fi
+
+# Check for the YouCompleteMe directory.
+# May fail depending on environment -- see Valloric's installation notes on GitHub.
+echo 'Finding the YouCompleteMe plugin...'
+if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
+  echo -e "Installing: $green$underline"YouCompleteMe"$endf"
+  cd $HOME/.vim/bundle/YouCompleteMe
+  ./install.sh --clang-completer
+fi
 
 # Fin.
-echo 'Note: Some Vim Plugins may require further set-up -- see their documentation.'
 echo 'Done!'
 exit 0

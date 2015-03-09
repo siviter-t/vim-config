@@ -108,7 +108,7 @@ set t_Co=256
 syntax on " Force syntax highlighting.
 " colorscheme solarized
 " let g:solarized_termcolors=256
-colorscheme molokai
+silent! colorscheme molokai
 let g:rehash256 = 1
 
 " highlight Normal ctermbg=none

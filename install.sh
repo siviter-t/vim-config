@@ -87,6 +87,7 @@ if [ ! -d $HOME/.cache/vim/swap ]; then
 fi
 
 # Fin.
-echo 'Note: Some Vim Plugins may require further set-up -- see their documentation.'
+echo 'Note: Some Vim Plugins may require further set-up.'
+echo 'Try setup.sh and/or see their documentation.'
 echo 'Done!'
 exit 0
