@@ -67,6 +67,11 @@ echo -e "Creating symlink: $magenta$vimrc_repo_path/Snippets$endf ->" \
         "$green$underline$HOME/.vim/Snippets$endf"
 ln -s $vimrc_repo_path/Snippets $HOME/.vim/Snippets
 
+# Link the YCM directory into the new .vim directory.
+echo -e "Creating symlink: $magenta$vimrc_repo_path/YCM$endf ->" \
+        "$green$underline$HOME/.vim/YCM$endf"
+ln -s $vimrc_repo_path/YCM $HOME/.vim/YCM
+
 # Check&Create the relevant cache folders for the user.
 echo 'Checking cache directories...'
 if [ ! -d $HOME/.cache ]; then

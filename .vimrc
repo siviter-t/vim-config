@@ -118,6 +118,9 @@ let g:rehash256 = 1
 " Other Stuff To Document... "
 " -------------------------- "
 
+" Path to the .vim directory.
+let _vim_path=$HOME.'/.vim'
+
 " Path to the cache folder for Vim.
 let _vim_cache_path=$HOME.'/.cache/vim'
 
@@ -215,8 +218,7 @@ let g:UltiSnipsSnippetDirectories=["Snippets"]
 
 let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-
-
+let g:ycm_global_ycm_extra_conf = _vim_path.'/YCM/ycm_extra_conf.py'
 
 " vim-airline
 let g:airline_theme='ubaryd' " Tabline/statusbar theme.
