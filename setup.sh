@@ -37,12 +37,12 @@ fi
 echo -e "Setup from repository: $blue$vimrc_repo_path$endf"
 
 # Check for the YouCompleteMe directory.
-# May fail depending on environment -- see Valloric's installation notes on GitHub.
+# May fail depending on environment -- see Valloric's installation notes on GitHub if it does.
 echo 'Finding the YouCompleteMe plugin...'
 if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
   echo -e "Installing: $green$underline"YouCompleteMe"$endf"
   cd $HOME/.vim/bundle/YouCompleteMe
-  ./install.sh --clang-completer
+  ./install.sh 
 fi
 
 # Fin.
