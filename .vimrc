@@ -13,16 +13,16 @@
 
 " Automatically reloads the vimrc configuration when Vim detects that its corresponding buffer
 " has been written to. Effectively allows realtime customisation of the Vim environment while
-" editing the vimrc; unfortunately other instances will still require resourcing.
+" editing the vimrc; unfortunately other Vim instances will still require resourcing.
 
 augroup vimrc_autoreloading
     autocmd!
     autocmd BufWritePost $MYVIMRC source $MYVIMRC
 augroup END
 
-" -------------------------------- "
-" 1.1 "Plugin Management (Vundle)" "
-" -------------------------------- "
+" ----------------------------- "
+" 1.1 "Plugin Manager (Vundle)" "
+" ----------------------------- "
 
 set nocompatible " Reset distribution clutter and any options set.
 filetype off " Temporarily turn off filetype detection.
@@ -45,64 +45,66 @@ Plugin 'majutsushi/tagbar' " Tagbar for a file
 
 call vundle#end() " End Plugin management.
 
-" --------------------------- "
-" 1.1 "Introductory Settings" "
-" --------------------------- "
+" ---------------------------- "
+" 1.1 "Personal Introductions" "
+" ---------------------------- "
+
+let _vim_path=$HOME.'/.vim' " Path to the .vim directory.
+let _vim_cache_path=$HOME.'/.cache/vim' " Path to the cache folder for Vim.
+let _vim_line_char_limit=96 " Define the character limit per line.
+let mapleader=' ' " Setting the Leader keyboard expansion.
+
+" ------------------------ "
+" 1.2 "De Facto Standards" "
+" ------------------------ "
 
 " Must-have, generic, borderline default options for a useful and sane Vim.
 
-" Enable smart filetype determined syntax highlighting and indentation.
-filetype plugin indent on
+filetype plugin indent on " Enable filetype determined syntax highlighting and indentation.
+set wildmenu " Allows wildcards in command-line completion.
+set backspace=indent,eol,start " Allow backspacing through indents, end-of-line breaks, etc.
+set confirm " Use a dialogue to confirm the saving of externally modified files.
+set notimeout ttimeout ttimeoutlen=200 " Time out on keycodes; but do not for keymappings.
+set complete-=i " Remove any included files from autocompletion -- tags are better.
+set autoread " Reread files that have been changed outside of Vim.
+set fileformats=unix,dos,mac " Set the likely fileformats for EOL character reading.
 
-" Allows wildcards in command-line completion.
-set wildmenu
-
-" Allow backspacing through indents, end-of-line breaks, etc.
-set backspace=indent,eol,start
-
-" Use a dialogue to confirm the saving of modified files.
-set confirm
-
-" Enable mouse interaction -- if supported.
+" Enable mouse interactions -- if supported.
 if has('mouse')
   set mouse=a
 endif
 
-" Time out on keycodes; but do not for keymappings.
-set notimeout ttimeout ttimeoutlen=200
+" -------------------------------- "
+" 2.0 "Arrangement of the Display" "
+" -------------------------------- "
 
-" Remove any included files from autocompletion -- tags are better.
-set complete-=i
+" Setting hidden additionally allows an undo history to be kept for all open buffers, as well
+" as a complaining dialogue when quitting from unsaved buffers.
 
-" ------------------------- "
-" 1.2 "Display Arrangement" "
-" ------------------------- "
+set hidden " Allow the current window to use and switch between unsaved buffers.
+set showcmd " Show partial commands on the last line of the screen.
+set noshowmode " Do not output the current mode to the last line -- a status bar job.
+set showtabline=2 " Force the tabline.
+set laststatus=2 " Force the display of the status bar at the bottom.
 
-" Allow the current window to use and switch between unsaved buffers. Allows an undo history
-" to kept for all open buffers. Also, complain about unsaved quitting and use swap files.
-set hidden
+" ------------------- "
+" 2.1 "Lines&Columns" "
+" ------------------- "
 
-" Show partial commands on the last line of the screen.
-set showcmd
+" The configuration of the lines and columns of the Vim editor; including character limits,
+" text wrapping, and guide-like highlighting. The number of characters per line before wrapping
+" is limited to 96 -- as a personal preference -- and can be modified by changing the integer
+" value given to the "_vim_line_char_limit" variable.
 
-" Do output the current mode to the last line -- this is the status bar's job.
-set noshowmode
+set ruler " Cursor position displayed in the status bar.
+set number " Line numbers in the first column on the left.
+set cursorline " Enable hightlighting of the current line.
+let &textwidth+=(_vim_line_char_limit-1) " Wrap any written text within the character limit.
+let &colorcolumn=_vim_line_char_limit " Enable highlighting of the character limit column.
 
-" Force the tabline.
-set showtabline=2
-
-" Line numbers on the left-hand side.
-set number
-
-" Force the display of the status bar at the bottom.
-set laststatus=2
-
-" Cursor position displayed in the status bar.
-set ruler
-
-" -------------------------- "
-" Colourscheme Configuration "
-" -------------------------- "
+" -------------------------------- "
+" 2.2 "Colourscheme Configuration" "
+" -------------------------------- "
 
 syntax on " Force syntax highlighting.
 set background=dark
@@ -118,34 +120,26 @@ let g:solarized_termcolors = 256
 " Other Stuff To Document... "
 " -------------------------- "
 
-" Path to the .vim directory.
-let _vim_path=$HOME.'/.vim'
-
-" Path to the cache folder for Vim.
-let _vim_cache_path=$HOME.'/.cache/vim'
-
-" Set the "Leader" keyboard shortcut to the "Space"-bar.
-let mapleader = ' '
-
-" Show any matching brackets when inserted -- for 3/10ths of a second.
-set showmatch matchtime=3
-
-set autoread " Reread files that have been changed outside of Vim.
-
+set showmatch matchtime=3 " Show any matching brackets when typed -- for 3/10ths of a second.
 " Avoiding loss of text from "Ctrl-U" and "Ctrl-W" keyboard shortcuts in insert mode.
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
 
+" ------------------- "
+" 3.X "File Recovery" "
+" ------------------- "
+
+" A degree of cushioning if the unthinkable were to happen. These commands will require the
+" existence of the swap and backup directories in the the user's ~/.cache/vim folder. This
+" path will need to be constructed if it has not been done already.
+
 set nobackup writebackup " Backup files before overwriting them; do not keep them after.
-" Set the swap/backup paths -- need to make them -- get Vim to make them?
-let &directory=_vim_cache_path.'/swap'
-let &backupdir=_vim_cache_path.'/backup'
+let &directory=_vim_cache_path.'/swap' " Location for the swap dir.
+let &backupdir=_vim_cache_path.'/backup' " Location of the backup dir.
 
-set fileformats=unix,dos,mac " Set the likely fileformats for EOL character reading.
-
-" ------------------------ "
-" 1.1 "Search and Replace" "
-" ------------------------ "
+" -------------------- "
+" 4.1 "Search&Replace" "
+" -------------------- "
 
 " Click "Enter" after searching to clear any highlighted matches.
 
@@ -174,26 +168,7 @@ let g:easytags_resolve_links = 1 " Resolve symbolic links.
 " Tagbar Toggle
 nnoremap <F8> :TagbarToggle<CR>
 
-" ---------------------------------- "
-" X.X "Line & Column Configuration " "
-" ---------------------------------- "
 
-" The configuration of the lines and columns of the Vim editor; including character limits,
-" text wrapping, and guide-like highlighting. The number of characters per line before wrapping
-" is limited to 96 -- as a personal preference -- and can be modified by changing the integer
-" value given to the "vimrc_line_char_limit" variable.
-
-" Define the character limit per line.
-let vimrc_line_char_limit=96
-
-" Wrap any written text to within the line character limit.
-let &textwidth+=(vimrc_line_char_limit-1)
-
-" Enable highlighting of the character limit column.
-let &colorcolumn=vimrc_line_char_limit
-
-" Enable hightlighting of the current line.
-set cursorline
 
 " --------------------- "
 " Plugins Configuration "
