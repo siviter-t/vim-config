@@ -104,12 +104,12 @@ set ruler
 " Colourscheme Configuration "
 " -------------------------- "
 
-set t_Co=256
 syntax on " Force syntax highlighting.
-" colorscheme solarized
-" let g:solarized_termcolors=256
-silent! colorscheme molokai
-let g:rehash256 = 1
+set background=dark
+silent! colorscheme solarized
+let g:solarized_termcolors = 256
+" silent! colorscheme molokai
+" let g:rehash256 = 1
 
 " highlight Normal ctermbg=none
 " highlight NonText ctermbg=none
@@ -165,9 +165,11 @@ nnoremap <silent> <CR> :let @/="" <CR>
 " X.X "Exuberant Ctags" "
 " --------------------- "
 
-set autochdir " Check parent directory.
-set tags=tags " Only check for default tagfile name.
-let g:easytags_file=_vim_cache_path.'/tags' " Location of the global easytag tagfile.
+set tags=,./.git/tags;,./tags;,./.tags;./TAGS;,./.TAGS; " Common tag places.
+let g:easytags_dynamic_files = 1 " Allow project specific tagfiles.
+let g:easytags_file = _vim_cache_path.'/gtags' " Location of the global tagfile.
+let g:easytags_by_filetype = _vim_cache_path.'/tags/' " Location of filetype specific tagfiles.
+let g:easytags_resolve_links = 1 " Resolve symbolic links.
 
 " Tagbar Toggle
 nnoremap <F8> :TagbarToggle<CR>
