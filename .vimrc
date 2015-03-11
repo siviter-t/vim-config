@@ -262,9 +262,9 @@ vnoremap <C-v> "+p<ESC>
 " use the command "echo 'stty ixany' >> ~/.bashrc" in a free shell/terminal; before restarting
 " any open instances to apply the configuration.
 
-noremap <C-w> <Esc>:w<CR>
-inoremap <C-w> <Esc>:w<CR>
-vnoremap <C-w> <Esc>:w<CR>
+" noremap <C-w> <Esc>:w<CR>
+" inoremap <C-w> <Esc>:w<CR>
+" vnoremap <C-w> <Esc>:w<CR>
 
 " ------------------- "
 " Indentation Control "
