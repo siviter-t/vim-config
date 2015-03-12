@@ -10,7 +10,6 @@
 " -------------------------- "
 " 1.0 "Vimrc Auto-reloading" "
 " -------------------------- "
-
 " Automatically reloads the vimrc configuration when Vim detects that its corresponding buffer
 " has been written to. Effectively allows realtime customisation of the Vim environment while
 " editing the vimrc; unfortunately other Vim instances will still require resourcing.
@@ -57,7 +56,6 @@ let mapleader=' ' " Setting the Leader keyboard expansion.
 " ------------------------ "
 " 1.2 "De Facto Standards" "
 " ------------------------ "
-
 " Must-have, generic, borderline default options for a useful and sane Vim.
 
 filetype plugin indent on " Enable filetype determined syntax highlighting and indentation.
@@ -77,7 +75,6 @@ endif
 " -------------------------------- "
 " 2.0 "Arrangement of the Display" "
 " -------------------------------- "
-
 " Setting hidden additionally allows an undo history to be kept for all open buffers, as well
 " as a complaining dialogue when quitting from unsaved buffers.
 
@@ -90,7 +87,6 @@ set laststatus=2 " Force the display of the status bar at the bottom.
 " ------------------- "
 " 2.1 "Lines&Columns" "
 " ------------------- "
-
 " The configuration of the lines and columns of the Vim editor; including character limits,
 " text wrapping, and guide-like highlighting. The number of characters per line before wrapping
 " is limited to 96 -- as a personal preference -- and can be modified by changing the integer
@@ -128,7 +124,6 @@ inoremap <C-w> <C-g>u<C-w>
 " ------------------- "
 " 3.X "File Recovery" "
 " ------------------- "
-
 " A degree of cushioning if the unthinkable were to happen. These commands will require the
 " existence of the swap and backup directories in the the user's ~/.cache/vim folder. This
 " path will need to be constructed if it has not been done already.
@@ -140,7 +135,6 @@ let &backupdir=_vim_cache_path.'/backup' " Location of the backup dir.
 " -------------------- "
 " 4.1 "Search&Replace" "
 " -------------------- "
-
 " Click "Enter" after searching to clear any highlighted matches.
 
 set hlsearch " Highlight search results.
@@ -155,9 +149,9 @@ nnoremap <silent> <CR> :let @/="" <CR>
 " set foldcolumn=1
 " set nofoldenable
 
-" --------------------- "
-" X.X "Exuberant Ctags" "
-" --------------------- "
+" ---------------------------- "
+" X.X "Native Exuberant Ctags" "
+" ---------------------------- "
 
 set tags=,./.git/tags;,./tags;,./.tags;./TAGS;,./.TAGS; " Common tag places.
 let g:easytags_dynamic_files = 1 " Allow project specific tagfiles.
@@ -168,36 +162,17 @@ let g:easytags_resolve_links = 1 " Resolve symbolic links.
 " Tagbar Toggle
 nnoremap <F8> :TagbarToggle<CR>
 
-
-
-" --------------------- "
-" Plugins Configuration "
-" --------------------- "
-
 " CtrlP -- Ignore folders with automated/generated content.
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
 
-" ------------------------- "
-" Code-snippets (UltiSnips) "
-" ------------------------- "
+" ------------------- "
+" X.X "Plugin and Go" "
+" ------------------- "
 
-" Code Snippets!!
+" ----------------------------- "
+" X.1 "Statusbar (vim-airline)" "
+" ----------------------------- "
 
-let g:UltiSnipsExpandTrigger = "<F12>"
-let g:UltiSnipsListSnippets = "<S-F12>"
-let g:UltiSnipsJumpForwardTrigger = "<F12>"
-let g:UltiSnipsJumpBackwardTrigger = "<M-F12>"
-let g:UltiSnipsSnippetDirectories=["Snippets"]
-
-" ------------------------------- "
-" Code-completion (YouCompleteMe) "
-" ------------------------------- "
-
-let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_global_ycm_extra_conf = _vim_path.'/YCM/ycm_extra_conf.py'
-
-" vim-airline
 let g:airline_theme='ubaryd' " Tabline/statusbar theme.
 " let g:airline_theme='solarized' " Tabline/statusbar theme.
 let g:airline#extensions#tabline#enabled = 1 " Smarter tab line.
@@ -234,10 +209,28 @@ endfunction
 " Applying the vim-airline configuration.
 autocmd VimEnter * call AirlineConfig()
 
+" ------------------------------- "
+" X.2 "Code-snippets (UltiSnips)" "
+" ------------------------------- "
+" Code Snippets!!
+
+let g:UltiSnipsExpandTrigger = "<F12>"
+let g:UltiSnipsListSnippets = "<S-F12>"
+let g:UltiSnipsJumpForwardTrigger = "<F12>"
+let g:UltiSnipsJumpBackwardTrigger = "<M-F12>"
+let g:UltiSnipsSnippetDirectories=["Snippets"]
+
+" ------------------------------------- "
+" X.3 "Code-completion (YouCompleteMe)" "
+" ------------------------------------- "
+
+let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_global_ycm_extra_conf = _vim_path.'/YCM/ycm_extra_conf.py'
+
 " --------------------------------------------------------------------------- "
 " Additional Cut&Copy (Visual) and Paste Control (Normal/Insert/Visual Modes) "
 " --------------------------------------------------------------------------- "
-
 " Allows more natural cut/copy/paste actions; and allows use of the system clipboard -- the
 " "d", "y", and "p" shortcuts remain independent and unaffected. Uses the more common shortcuts
 " "Ctrl-X", "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard,
@@ -254,7 +247,6 @@ vnoremap <C-v> "+p<ESC>
 " ---------------------------------------------- "
 " Save Current File (Normal/Insert/Visual Modes) "
 " ---------------------------------------------- "
-
 " Write out or rather save the current file -- if set to "Ctrl-S", it may pause the terminal
 " window. Either resume the process with "Ctrl-Q" --  which will not trigger the shortcut;
 " disable "Ctrl-S" altogether for the terminal; or personally my favourite method, use "Ctrl-W"
@@ -269,7 +261,6 @@ vnoremap <C-v> "+p<ESC>
 " ------------------- "
 " Indentation Control "
 " ------------------- "
-
 " Use "Tab" to forward indent the current line and "Shift-Tab" to backwards indent it. Within
 " visual mode, the shortcuts will instead perform the indentation on the current selection. The
 " action taken can be repeated by using the fullstop, ".". The indentation of the currently
@@ -294,7 +285,6 @@ vnoremap <S-Tab> <gv
 " ----------- "
 " Tab Control "
 " ----------- "
-
 " Use "Ctrl-T" to open a new tab; and "Ctrl-Y" to close it. To swap to the previous tab, use
 " "Ctrl-PageUp"; conversely, use "Ctrl-PageDown" to change to the next open tab. If there is no
 " adjacent tab open in the direction desired, Vim will loop back to the first or last tab.
@@ -336,7 +326,6 @@ noremap <silent><Leader>9 <ESC>9gt
 " --------------- "
 " Comment Control "
 " --------------- "
-
 " Use "Leader-D" to comment or decomment the current line; unless Vim is in visual mode; where
 " instead the entire selection is either commented in or out -- as appropriate.
 
