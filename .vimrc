@@ -1,8 +1,8 @@
-" \file .vimrc
-" \author Taylor Siviter
-" \date March 2015
-" \brief Personal Vim Configuration.
-" \copyright Mozilla Public License, Version 2.0.
+" File: .vimrc
+" Author: Taylor Siviter
+" Date: March 2015
+" Brief: Personal Vim Configuration.
+" Copyright: Mozilla Public License, Version 2.0.
 " This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
 " not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 " -------------------------------------------------------------------------------------------- "
@@ -29,18 +29,23 @@ set rtp+=~/.vim/bundle/Vundle.vim " Runtime path to Vundle.
 call vundle#begin() " Start Vundle management shenanigans.
 
 Plugin 'gmarik/Vundle.vim' " Vundle plug-in mangager.
-Plugin 'bling/vim-airline' " Status/tabline bar.
-Plugin 'flazz/vim-colorschemes' " Many colorschemes/themes.
 Plugin 'kien/ctrlp.vim' " File/etc finder.
+
 Plugin 'SirVer/ultisnips' " Code snippets.
 Plugin 'Valloric/YouCompleteMe' " Code-completion.
 Plugin 'tomtom/tcomment_vim' " Comment toggler.
 Plugin 'tpope/vim-fugitive' " Git wrapper.
 Plugin 'airblade/vim-gitgutter' " Git diffs linenumbers.
-Plugin 'octol/vim-cpp-enhanced-highlight' " Additional CXX highlighting.
+
 Plugin 'xolox/vim-misc' " Misc functions for xolox Vim plugins.
 Plugin 'xolox/vim-easytags' " Automated tag generation and syntax highlighting.
 Plugin 'majutsushi/tagbar' " Tagbar for a file
+
+Plugin 'bling/vim-airline' " Status/tabline bar.
+Plugin 'reedes/vim-thematic' " Theme control.
+Plugin 'tomasr/molokai' " Molokai colourscheme.
+Plugin 'altercation/vim-colors-solarized' " Solarized colourscheme.
+Plugin 'octol/vim-cpp-enhanced-highlight' " Additional CXX highlighting.
 
 call vundle#end() " End Plugin management.
 
@@ -83,6 +88,7 @@ set showcmd " Show partial commands on the last line of the screen.
 set noshowmode " Do not output the current mode to the last line -- a status bar job.
 set showtabline=2 " Force the tabline.
 set laststatus=2 " Force the display of the status bar at the bottom.
+syntax on " Force syntax highlighting.
 
 " ------------------- "
 " 2.1 "Lines&Columns" "
@@ -97,20 +103,6 @@ set number " Line numbers in the first column on the left.
 set cursorline " Enable hightlighting of the current line.
 let &textwidth+=(_vim_line_char_limit-1) " Wrap any written text within the character limit.
 let &colorcolumn=_vim_line_char_limit " Enable highlighting of the character limit column.
-
-" -------------------------------- "
-" 2.2 "Colourscheme Configuration" "
-" -------------------------------- "
-
-syntax on " Force syntax highlighting.
-set background=dark
-silent! colorscheme solarized
-let g:solarized_termcolors = 256
-" silent! colorscheme molokai
-" let g:rehash256 = 1
-
-" highlight Normal ctermbg=none
-" highlight NonText ctermbg=none
 
 " -------------------------- "
 " Other Stuff To Document... "
@@ -129,8 +121,8 @@ inoremap <C-w> <C-g>u<C-w>
 " path will need to be constructed if it has not been done already.
 
 set nobackup writebackup " Backup files before overwriting them; do not keep them after.
-let &directory=_vim_cache_path.'/swap' " Location for the swap dir.
-let &backupdir=_vim_cache_path.'/backup' " Location of the backup dir.
+let &directory = _vim_cache_path.'/swap' " Location for the swap dir.
+let &backupdir = _vim_cache_path.'/backup' " Location of the backup dir.
 
 " -------------------- "
 " 4.1 "Search&Replace" "
@@ -165,16 +157,16 @@ nnoremap <F8> :TagbarToggle<CR>
 " CtrlP -- Ignore folders with automated/generated content.
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
 
-" ------------------- "
-" X.X "Plugin and Go" "
-" ------------------- "
 
-" ----------------------------- "
-" X.1 "Statusbar (vim-airline)" "
-" ----------------------------- "
 
-let g:airline_theme='ubaryd' " Tabline/statusbar theme.
-" let g:airline_theme='solarized' " Tabline/statusbar theme.
+" -------------------- "
+" X.0 "Plugins and Go" "
+" -------------------- "
+
+" ------------------------------------------ "
+" X.1 "Update The Status[bar] (vim-airline)" "
+" ------------------------------------------ "
+
 let g:airline#extensions#tabline#enabled = 1 " Smarter tab line.
 let g:airline#extensions#whitespace#enabled = 0 " Disable whitespace/trailing section.
 let g:airline_powerline_fonts = 1 " Enable powerline fonts.
@@ -187,7 +179,7 @@ endif
 " Overriding space character for powerline fonts.
 let g:airline_symbols.space = "\ua0"
 
-" Available Powerline symbols -- for reference more than anything.
+" Available Powerline symbols -- for reference.
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
@@ -207,10 +199,71 @@ function! AirlineConfig()
 endfunction
 
 " Applying the vim-airline configuration.
-autocmd VimEnter * call AirlineConfig()
+augroup vim_airline_config
+    autocmd!
+    autocmd VimEnter * call AirlineConfig()
+augroup END
+
+" --------------------------------------------- "
+" X.2 "Colourschemes -> Themes! (vim-thematic)" "
+" --------------------------------------------- "
+" Allows on-the-fly Vim theming using Vim's command-line. Use ":Thematic <theme>" to load the
+" theme named within the angular brackets. Alternatively, use the other Thematic commands, such
+" as ":ThematicNext", ":ThematicRandom", etc -- see the autocompletion at the command-line.
+" See: https://github.com/reedes/vim-thematic
+
+let g:rehash256 = 1 " Molokai 256 colour terminal.
+let g:solarized_termcolors = 256 " Solarized 256 colour terminal.
+let g:thematic#theme_name = 'molokai' " Set the default theme to open.
+
+" Available themes.
+let g:thematic#themes = {
+  \'default' :{
+    \'colorscheme': 'industry',
+    \'background': 'dark',
+    \'airline-theme': 'ubaryd',
+  \},
+  \'molokai' :{
+    \'colorscheme': 'molokai',
+    \'background': 'dark',
+    \'airline_theme': 'ubaryd',
+  \},
+  \'solarized_light' :{
+    \'colorscheme': 'solarized',
+    \'background': 'light',
+    \'airline_theme': 'solarized',
+  \},
+  \'solarized_dark' :{
+    \'colorscheme': 'solarized',
+    \'background': 'dark',
+    \'airline_theme': 'solarized',
+  \},
+\}
+
+" Lazy hackery for a better airline thematic theme changeover.
+function! Better_airline_thematic_changing(theme_name)
+  if match(a:theme_name, 'default') || match(a:theme_name, 'molokai')
+    let g:airline_theme = 'ubaryd'
+    if exists(':AirlineTheme')
+      AirlineTheme ubaryd
+    endif
+  endif
+  if match(a:theme_name, 'solarized_light') || match(a:theme_name, 'solarized_dark')
+    let g:airline_theme = 'solarized'
+    if exists(':AirlineTheme')
+      AirlineTheme solarized
+    endif
+  endif
+endfunction
+
+" Set the airline theme on entering...
+augroup vim_airline_theme_set
+    autocmd!
+    autocmd VimEnter * call Better_airline_thematic_changing('g:thematic#theme_name')
+augroup END
 
 " ------------------------------- "
-" X.2 "Code-snippets (UltiSnips)" "
+" X.3 "Code-snippets (UltiSnips)" "
 " ------------------------------- "
 " Code Snippets!!
 
@@ -221,7 +274,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<M-F12>"
 let g:UltiSnipsSnippetDirectories=["Snippets"]
 
 " ------------------------------------- "
-" X.3 "Code-completion (YouCompleteMe)" "
+" X.4 "Code-completion (YouCompleteMe)" "
 " ------------------------------------- "
 
 let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
