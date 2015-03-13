@@ -22,6 +22,7 @@ augroup END
 " ----------------------------- "
 " 1.1 "Plugin Manager (Vundle)" "
 " ----------------------------- "
+" See: https://github.com/gmarik/Vundle.vim
 
 set nocompatible " Reset distribution clutter and any options set.
 filetype off " Temporarily turn off filetype detection.
@@ -30,17 +31,14 @@ call vundle#begin() " Start Vundle management shenanigans.
 
 Plugin 'gmarik/Vundle.vim' " Vundle plug-in mangager.
 Plugin 'kien/ctrlp.vim' " File/etc finder.
-
 Plugin 'SirVer/ultisnips' " Code snippets.
 Plugin 'Valloric/YouCompleteMe' " Code-completion.
 Plugin 'tomtom/tcomment_vim' " Comment toggler.
 Plugin 'tpope/vim-fugitive' " Git wrapper.
 Plugin 'airblade/vim-gitgutter' " Git diffs linenumbers.
-
 Plugin 'xolox/vim-misc' " Misc functions for xolox Vim plugins.
 Plugin 'xolox/vim-easytags' " Automated tag generation and syntax highlighting.
 Plugin 'majutsushi/tagbar' " Tagbar for a file
-
 Plugin 'bling/vim-airline' " Status/tabline bar.
 Plugin 'reedes/vim-thematic' " Theme control.
 Plugin 'tomasr/molokai' " Molokai colourscheme.
@@ -50,7 +48,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight' " Additional CXX highlighting.
 call vundle#end() " End Plugin management.
 
 " ---------------------------- "
-" 1.1 "Personal Introductions" "
+" 1.2 "Personal Introductions" "
 " ---------------------------- "
 
 let _vim_path=$HOME.'/.vim' " Path to the .vim directory.
@@ -58,8 +56,12 @@ let _vim_cache_path=$HOME.'/.cache/vim' " Path to the cache folder for Vim.
 let _vim_line_char_limit=96 " Define the character limit per line.
 let mapleader=' ' " Setting the Leader keyboard expansion.
 
+" Ignore the following places or files in wildcard expansion.
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
+let g:netrw_home=_vim_cache_path " Change the location to save netrw cache.
+
 " ------------------------ "
-" 1.2 "De Facto Standards" "
+" 1.3 "De Facto Standards" "
 " ------------------------ "
 " Must-have, generic, borderline default options for a useful and sane Vim.
 
@@ -90,9 +92,9 @@ set showtabline=2 " Force the tabline.
 set laststatus=2 " Force the display of the status bar at the bottom.
 syntax on " Force syntax highlighting.
 
-" ------------------- "
-" 2.1 "Lines&Columns" "
-" ------------------- "
+" --------------------- "
+" 2.1 "Lines & Columns" "
+" --------------------- "
 " The configuration of the lines and columns of the Vim editor; including character limits,
 " text wrapping, and guide-like highlighting. The number of characters per line before wrapping
 " is limited to 96 -- as a personal preference -- and can be modified by changing the integer
@@ -104,29 +106,111 @@ set cursorline " Enable hightlighting of the current line.
 let &textwidth+=(_vim_line_char_limit-1) " Wrap any written text within the character limit.
 let &colorcolumn=_vim_line_char_limit " Enable highlighting of the character limit column.
 
-" -------------------------- "
-" Other Stuff To Document... "
-" -------------------------- "
+" ---------------------- "
+" 2.2 "Tabs for Buffers" "
+" ---------------------- "
+" Use "Ctrl-T" to open a new tab; and "Ctrl-Y" to close it. To swap to the previous tab, use
+" "Ctrl-PageUp"; conversely, use "Ctrl-PageDown" to change to the next open tab. If there is no
+" adjacent tab open in the direction desired, Vim will loop back to the first or last tab.
+" Additionally, the shortcut "Leader-#", where # is a number between 1 and 9, can be used to
+" quickly swap to the respective tab. To view any open buffers as tabs, use "Leader-t".
+
+" Maximum number of open tabs per Vim instance.
+set tabpagemax=9
+
+" Remap CTRL-T to backspace.
+noremap <Backspace> <C-T>
+
+" Tab creation and destruction.
+nnoremap <silent><C-T> :tabnew<CR>
+inoremap <silent><C-T> <Esc>:tabnew<CR>i
+vnoremap <silent><C-T> <Esc>:tabnew<CR>v
+nnoremap <silent><C-Y> :tabclose<CR>
+inoremap <silent><C-Y> <Esc>:tabclose<CR>i
+vnoremap <silent><C-Y> <Esc>:tabclose<CR>v
+
+" Open all buffers as tabs (Max=9).
+nnoremap <silent><Leader>t :ec "No available buffers to tab"<CR>:tab 9sball<CR>
+
+" If in visual mode, reselect it on tab movement.
+vnoremap <silent><C-PageUp> <Esc>:tabprevious<CR>v
+vnoremap <silent><C-PageDown> <Esc>:tabnext<CR>v
+
+" Swap to the respectively numbered tab.
+noremap <silent><Leader>1 <ESC>1gt
+noremap <silent><Leader>2 <ESC>2gt
+noremap <silent><Leader>3 <ESC>3gt
+noremap <silent><Leader>4 <ESC>4gt
+noremap <silent><Leader>5 <ESC>5gt
+noremap <silent><Leader>6 <ESC>6gt
+noremap <silent><Leader>7 <ESC>7gt
+noremap <silent><Leader>8 <ESC>8gt
+noremap <silent><Leader>9 <ESC>9gt
+
+" --------------------------- "
+" 3.0 "Workflow Manipulation" "
+" --------------------------- "
 
 set showmatch matchtime=3 " Show any matching brackets when typed -- for 3/10ths of a second.
+
 " Avoiding loss of text from "Ctrl-U" and "Ctrl-W" keyboard shortcuts in insert mode.
 inoremap <C-u> <C-g>u<C-u>
 inoremap <C-w> <C-g>u<C-w>
 
-" ------------------- "
-" 3.X "File Recovery" "
-" ------------------- "
-" A degree of cushioning if the unthinkable were to happen. These commands will require the
-" existence of the swap and backup directories in the the user's ~/.cache/vim folder. This
-" path will need to be constructed if it has not been done already.
+" ------------------------------------- "
+" 3.1 "A Familiar Cut, Copy, and Paste" "
+" ------------------------------------- "
+" Allows more natural cut/copy/paste actions; and allows use of the system clipboard -- the
+" "d", "y", and "p" shortcuts remain independent and unaffected. Uses the more common shortcuts
+" "Ctrl-X", "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard,
+" this requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
+" OSX/Windows, the "* register should be used instead. While either/or registers may work, this
+" option is unfortunately particularly system specific.
 
-set nobackup writebackup " Backup files before overwriting them; do not keep them after.
-let &directory = _vim_cache_path.'/swap' " Location for the swap dir.
-let &backupdir = _vim_cache_path.'/backup' " Location of the backup dir.
+vnoremap <C-x> "+d<ESC>
+vnoremap <C-c> "+y<ESC>
+nnoremap <C-v> <ESC>"+p
+inoremap <C-v> <C-O>"+p
+vnoremap <C-v> "+p<ESC>
 
-" -------------------- "
-" 4.1 "Search&Replace" "
-" -------------------- "
+" --------------------- "
+" 3.2 "Familiar Saving" "
+" --------------------- "
+" Saving the current file with the familiar shortcut, "Ctrl-S"! Due to a similar and almost
+" archaic shortcut in many terminal emulators, it is likely that this method will fail to work
+" with terminal Vim; the shortcut will be overriden and instead pause the workflow -- appearing
+" to the uninitiated as a frozen Vim window. Workflow is resumed with the shortcut, "Ctrl-Q"; 
+" however a more natural approach would be to allow any key to trigger resumption; BASH users
+" can do this by using the command "echo 'stty ixany' >> ~/.bashrc" in a free shell/terminal.
+
+noremap <C-s> <Esc>:w<CR>
+inoremap <C-s> <Esc>:w<CR>
+vnoremap <C-s> <Esc>:w<CR>
+
+" ------------------------- "
+" 3.3 "Natural Indentation" "
+" ------------------------- "
+" Use "Tab" to forward indent the current line and "Shift-Tab" to backwards indent it. Within
+" visual mode, the shortcuts will instead perform the indentation on the current selection. The
+" action taken can be repeated by using the fullstop, ".". The indentation of the currently
+" opened file can be 'fixed' by using "gg" followed by "=G".
+
+set shiftround " Always round indents to a multiple of shiftwidth.
+set autoindent " Copy indent from the current line when starting a new line.
+set smarttab " Use shiftwidth.
+set tabstop=2 shiftwidth=2 " Tab width settings.
+set expandtab " Use appropriate spaces instead of tabs.
+
+nnoremap <Tab> <ESC>>>_:ec ""<CR>
+nnoremap <S-Tab> <ESC><<_:ec ""<CR>
+inoremap <Tab> <C-t><C-o>:ec ""<CR>
+inoremap <S-Tab> <C-D><C-o>:ec ""<CR>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" ---------------------- "
+" 3.4 "Search & Replace" "
+" ---------------------- "
 " Click "Enter" after searching to clear any highlighted matches.
 
 set hlsearch " Highlight search results.
@@ -136,30 +220,47 @@ set ignorecase smartcase " Case insensitive searching; except when using capital
 " Clear any highlighted search results.
 nnoremap <silent> <CR> :let @/="" <CR>
 
-" " Text folding
-" set foldmethod=syntax
-" set foldcolumn=1
-" set nofoldenable
+" -------------------------------- "
+" 4.0 "Programming-specific Magic" "
+" -------------------------------- "
 
-" ---------------------------- "
-" X.X "Native Exuberant Ctags" "
-" ---------------------------- "
+set tags=,./.git/tags;,./tags;,./.tags;./TAGS;,./.TAGS; " Common tagfile places.
 
-set tags=,./.git/tags;,./tags;,./.tags;./TAGS;,./.TAGS; " Common tag places.
-let g:easytags_dynamic_files = 1 " Allow project specific tagfiles.
-let g:easytags_file = _vim_cache_path.'/gtags' " Location of the global tagfile.
-let g:easytags_by_filetype = _vim_cache_path.'/tags/' " Location of filetype specific tagfiles.
-let g:easytags_resolve_links = 1 " Resolve symbolic links.
+" -------------------------------- "
+" 4.1 "Forced Syntax Highlighting" "
+" -------------------------------- "
 
-" Tagbar Toggle
-nnoremap <F8> :TagbarToggle<CR>
+" Recognise doxygen-styled documentation comments.
+let g:load_doxygen_syntax=1
+" let g:doxygen_enhanced_colour=1
 
-" CtrlP -- Ignore folders with automated/generated content.
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
+" Customised CXX Metatypes.
+let custom_cpp_types=" string_t fun_t int_t real_t complex_t index_t vec_t table_t".
+                   \ " colVec_t rowVec_t matrix_t triad_t tetrad_t tensor_t".
+                   \ " colVec_ft rowVec_ft matrix_ft triad_ft tetrad_ft tensor_ft".
+                   \ " colVec_it rowVec_it matrix_it triad_it tetrad_it tensor_it".
+                   \ " resource_t resptr_t"
 
+" Application of any customised CXX syntax.
+augroup custom_cpp_syntax
+  autocmd!
+  execute "autocmd FileType cpp :syntax keyword cppType" .custom_cpp_types
+  execute "highlight link cppType Type"
+augroup END
+
+" ------------------- "
+" 5.0 "File Recovery" "
+" ------------------- "
+" A degree of cushioning if the unthinkable were to happen. These commands will require the
+" existence of the swap and backup directories in the the user's ~/.cache/vim folder. This
+" path will need to be constructed if it has not been done already.
+
+set nobackup writebackup " Backup files before overwriting them; do not keep them after.
+let &directory = _vim_cache_path.'/swap' " Location for the swap dir.
+let &backupdir = _vim_cache_path.'/backup' " Location of the backup dir.
 
 " --------------------------------- "
-" X.0 "GVim Specific Configuration" "
+" 6.0 "GVim Specific Configuration" "
 " --------------------------------- "
 " Configures the GUI version of Vim. To align with the terminal version, this removes all the
 " added clutter; including menubars, toolbars, and scrollbars.
@@ -172,12 +273,18 @@ if has('gui_running')
 endif
 
 " -------------------- "
-" X.0 "Plugins and Go" "
+" 7.0 "Plugins and Go" "
 " -------------------- "
 
 " ------------------------------------------ "
-" X.1 "Update The Status[bar] (vim-airline)" "
+" 7.1 "Update The Status[bar] (vim-airline)" "
 " ------------------------------------------ "
+" A lovely statusbar -- and a better tabbar. Requires the installation of Powerline fonts for
+" both the terminal and GUI versions of Vim -- see the documentation from the repositories
+" listed below. An important caveat for terminal usage, the emulator used for Vim must have one
+" of the prepatched Powerline fonts set as the current font; otherwise, it will not be used. 
+" See: https://github.com/bling/vim-airline
+" See: https://github.com/powerline/fonts
 
 let g:airline#extensions#tabline#enabled = 1 " Smarter tab line.
 let g:airline#extensions#whitespace#enabled = 0 " Disable whitespace/trailing section.
@@ -217,7 +324,7 @@ augroup vim_airline_config
 augroup END
 
 " --------------------------------------------- "
-" X.2 "Colourschemes -> Themes! (vim-thematic)" "
+" 7.2 "Colourschemes -> Themes! (vim-thematic)" "
 " --------------------------------------------- "
 " Allows on-the-fly Vim theming using Vim's command-line. Use ":Thematic <theme>" to load the
 " theme named within the angular brackets. Alternatively, use the other Thematic commands, such
@@ -275,9 +382,9 @@ augroup vim_airline_theme_set
 augroup END
 
 " ------------------------------- "
-" X.3 "Code-snippets (UltiSnips)" "
+" 7.3 "Code-snippets (UltiSnips)" "
 " ------------------------------- "
-" Code Snippets!!
+" See: https://github.com/SirVer/ultisnips
 
 let g:UltiSnipsExpandTrigger = "<F12>"
 let g:UltiSnipsListSnippets = "<S-F12>"
@@ -286,154 +393,41 @@ let g:UltiSnipsJumpBackwardTrigger = "<M-F12>"
 let g:UltiSnipsSnippetDirectories=["Snippets"]
 
 " ------------------------------------- "
-" X.4 "Code-completion (YouCompleteMe)" "
+" 7.4 "Code-completion (YouCompleteMe)" "
 " ------------------------------------- "
+" See: https://github.com/Valloric/YouCompleteMe
 
 let g:ycm_key_list_select_completion = ['<Tab>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_global_ycm_extra_conf = _vim_path.'/YCM/ycm_extra_conf.py'
 
-" --------------------------------------------------------------------------- "
-" Additional Cut&Copy (Visual) and Paste Control (Normal/Insert/Visual Modes) "
-" --------------------------------------------------------------------------- "
-" Allows more natural cut/copy/paste actions; and allows use of the system clipboard -- the
-" "d", "y", and "p" shortcuts remain independent and unaffected. Uses the more common shortcuts
-" "Ctrl-X", "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard,
-" this requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
-" OSX/Windows, the "* register should be used instead. While either/or registers may work, this
-" option is unfortunately particularly system specific.
+" ------------------------------------------------ "
+" 7.5 "Better Exuberant Ctags (easytags & tagbar)" "
+" ------------------------------------------------ "
+" See: https://github.com/xolox/vim-easytags
+" See: https://github.com/majutsushi/tagbar
 
-vnoremap <C-x> "+d<ESC>
-vnoremap <C-c> "+y<ESC>
-nnoremap <C-v> <ESC>"+p
-inoremap <C-v> <C-O>"+p
-vnoremap <C-v> "+p<ESC>
+let g:easytags_dynamic_files = 1 " Allow project specific tagfiles.
+let g:easytags_file = _vim_cache_path.'/gtags' " Location of the global tagfile.
+let g:easytags_by_filetype = _vim_cache_path.'/tags/' " Location of filetype specific tagfiles.
+let g:easytags_resolve_links = 1 " Resolve symbolic links.
 
-" ---------------------------------------------- "
-" Save Current File (Normal/Insert/Visual Modes) "
-" ---------------------------------------------- "
-" Write out or rather save the current file -- if set to "Ctrl-S", it may pause the terminal
-" window. Either resume the process with "Ctrl-Q" --  which will not trigger the shortcut;
-" disable "Ctrl-S" altogether for the terminal; or personally my favourite method, use "Ctrl-W"
-" instead; but allow any key to resume if "Ctrl-S" has been pressed. To do this, BASH users can
-" use the command "echo 'stty ixany' >> ~/.bashrc" in a free shell/terminal; before restarting
-" any open instances to apply the configuration.
-
-" noremap <C-w> <Esc>:w<CR>
-" inoremap <C-w> <Esc>:w<CR>
-" vnoremap <C-w> <Esc>:w<CR>
-
-" ------------------- "
-" Indentation Control "
-" ------------------- "
-" Use "Tab" to forward indent the current line and "Shift-Tab" to backwards indent it. Within
-" visual mode, the shortcuts will instead perform the indentation on the current selection. The
-" action taken can be repeated by using the fullstop, ".". The indentation of the currently
-" opened file can be 'fixed' by using "gg" followed by "=G".
-
-
-set shiftround " Always round indents to a multiple of shiftwidth.
-set autoindent " Copy indent from the current line when starting a new line.
-set smarttab " Use shiftwidth.
-set tabstop=2 shiftwidth=2 " Tab width settings.
-set expandtab " Use appropriate spaces instead of tabs.
-
-
-
-nnoremap <Tab> <ESC>>>_:ec ""<CR>
-nnoremap <S-Tab> <ESC><<_:ec ""<CR>
-inoremap <Tab> <C-t><C-o>:ec ""<CR>
-inoremap <S-Tab> <C-D><C-o>:ec ""<CR>
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-
-" ----------- "
-" Tab Control "
-" ----------- "
-" Use "Ctrl-T" to open a new tab; and "Ctrl-Y" to close it. To swap to the previous tab, use
-" "Ctrl-PageUp"; conversely, use "Ctrl-PageDown" to change to the next open tab. If there is no
-" adjacent tab open in the direction desired, Vim will loop back to the first or last tab.
-" Additionally, the shortcut "Leader-#", where # is a number between 1 and 9, can be used to
-" quickly swap to the respective tab. To view any open buffers as tabs, use "Leader-t".
-
-" Maximum number of open tabs per Vim instance.
-set tabpagemax=9
-
-" Remap CTRL-T to backspace
-noremap <Backspace> <C-T>
-
-" Tab creation and destruction.
-nnoremap <silent><C-T> :tabnew<CR>
-inoremap <silent><C-T> <Esc>:tabnew<CR>i
-vnoremap <silent><C-T> <Esc>:tabnew<CR>v
-nnoremap <silent><C-Y> :tabclose<CR>
-inoremap <silent><C-Y> <Esc>:tabclose<CR>i
-vnoremap <silent><C-Y> <Esc>:tabclose<CR>v
-
-" Open all buffers as tabs (Max=9).
-nnoremap <silent><Leader>t :ec "No available buffers to tab"<CR>:tab 9sball<CR>
-
-" If in visual mode, reselect it on tab movement.
-vnoremap <silent><C-PageUp> <Esc>:tabprevious<CR>v
-vnoremap <silent><C-PageDown> <Esc>:tabnext<CR>v
-
-" Swap to the respectively numbered tab.
-noremap <silent><Leader>1 <ESC>1gt
-noremap <silent><Leader>2 <ESC>2gt
-noremap <silent><Leader>3 <ESC>3gt
-noremap <silent><Leader>4 <ESC>4gt
-noremap <silent><Leader>5 <ESC>5gt
-noremap <silent><Leader>6 <ESC>6gt
-noremap <silent><Leader>7 <ESC>7gt
-noremap <silent><Leader>8 <ESC>8gt
-noremap <silent><Leader>9 <ESC>9gt
+" Tagbar Toggle
+nnoremap <F8> :TagbarToggle<CR>
 
 " --------------- "
-" Comment Control "
+" 7.6 "Comments!" "
 " --------------- "
 " Use "Leader-D" to comment or decomment the current line; unless Vim is in visual mode; where
 " instead the entire selection is either commented in or out -- as appropriate.
+" See: https://github.com/tomtom/tcomment_vim
 
 noremap <Leader>d :TComment<CR>
 
-"
-" Other stuff...
+" ---------------------------------------- "
+" 7.7 "Git Git Git (fugitive & gitgutter)" "
+" ---------------------------------------- "
+" See: https://github.com/tpope/vim-fugitive
+" See: https://github.com/airblade/vim-gitgutter
 
-
-noremap <Leader>p :set paste<CR>
-nnoremap <Leader>o :set nopaste<CR>
 noremap  <Leader>g :GitGutterToggle<CR>
-
-" this machine config
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
-" ------------------------- "
-" X.X "Syntax Highlighting" "
-" ------------------------- "
-
-" Recognise doxygen-styled documentation comments.
-let g:load_doxygen_syntax=1
-" let g:doxygen_enhanced_colour=1
-
-" Customised CXX Metatypes.
-let custom_cpp_types=" string_t fun_t int_t real_t complex_t index_t vec_t table_t".
-                   \ " colVec_t rowVec_t matrix_t triad_t tetrad_t tensor_t".
-                   \ " colVec_ft rowVec_ft matrix_ft triad_ft tetrad_ft tensor_ft".
-                   \ " colVec_it rowVec_it matrix_it triad_it tetrad_it tensor_it".
-                   \ " resource_t resptr_t"
-
-" Application of any customised CXX syntax.
-augroup custom_cpp_syntax
-  autocmd!
-  execute "autocmd FileType cpp :syntax keyword cppType" .custom_cpp_types
-  execute "highlight link cppType Type"
-augroup END
-
-" ------------------------- "
-" X.X "netrw Configuration" "
-" ------------------------- "
-
-" Change the location to save cache files.
-let g:netrw_home=_vim_cache_path
