@@ -158,6 +158,18 @@ nnoremap <F8> :TagbarToggle<CR>
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
 
 
+" --------------------------------- "
+" X.0 "GVim Specific Configuration" "
+" --------------------------------- "
+" Configures the GUI version of Vim. To align with the terminal version, this removes all the
+" added clutter; including menubars, toolbars, and scrollbars.
+
+if has('gui_running')
+  set guioptions-=M " Remove and do not source the menubar.
+  set guioptions-=T " Remove the toolbar.
+  set guioptions-=r " Remove right-hand scrollbar.
+  set guioptions-=L " Remove left-hand scrollbar.
+endif
 
 " -------------------- "
 " X.0 "Plugins and Go" "
