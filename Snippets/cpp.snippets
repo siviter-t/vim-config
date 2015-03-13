@@ -1,25 +1,20 @@
 # \file cpp.snippets
 # \author Taylor Siviter
-# \date February 2015
+# \date March 2015
 # \copyright Mozilla Public License, Version 2.0.
 # This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
 # not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # -------------------------------------------------------------------------------------------- #
 
-snippet #ifn "Auto header guards." bt
-#ifndef _${1:BASENAME}_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
-#define _$1_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
+# ------------------------------ #
+# 1.0 "Introductory Boilerplate" #
+# ------------------------------ #
 
-$0
-
-#endif
-endsnippet
-
-snippet /*! "File heading information." bt
+snippet /*! "File heading information" bt
 /*!
  * \file `!p snip.rv = fn`
  * \author Taylor Siviter
- * \version 0.01
+ * \version 0.1.0
  * \date `date +%B" "%Y`
  * \brief ${1:Insert a brief description.}
  *
@@ -33,6 +28,65 @@ snippet /*! "File heading information." bt
 $0
 endsnippet
 
-snippet ///< "Doxygen right-aligned sameline comments -- at column #64."
+# ------------------ #
+# 2.0 "Flow Control" #
+# ------------------ #
+
+snippet for "Generic for loops" bt
+for(${1:math::index_t} ${2:i} = ${3:0}; $2 ${4:<} ${5:10}; $2${6:++}) $0;
+endsnippet
+
+snippet for "Range-based for loops" bt
+for(${1:auto&&} ${2:i} : ${3:e.g. std::vector}) $2 ${0:= 42};
+endsnippet
+
+# ------------- #
+# 3.0 "Headers" #
+# ------------- #
+
+snippet #ifn "Header guards" bt
+#ifndef _${1:BASENAME}_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
+#define _$1_`!p snip.rv=vim.eval("expand('%:t:r')")+'_'+vim.eval("expand('%:t:e')")`
+
+$0
+
+#endif
+endsnippet
+
+# ---------------------------------- #
+# X.0 "Doxygen Documentation Galore" #
+# ---------------------------------- #
+
+snippet ///< "Right-aligned doxygen comments (Column #64)"
 `!p snip.rv = (64-int(vim.eval("virtcol('.')")))*' '+'///< '+t[0]`
+endsnippet
+
+snippet /// "Doxygen undocumented block"
+/// \cond
+
+$0
+
+/// \endcond
+endsnippet
+
+snippet /// "Doxygen conditional block"
+/// \cond ${1:NAME_OF_BLOCK}
+/*
+ * ${1:Description of the conditional block -- if needed.}
+ */
+
+$0
+
+/// \endcond
+endsnippet
+
+snippet /*!! "Function or structure doxygen block"
+/*!
+ * \brief ${1:Insert a brief here.}
+ * \param $2 -- ${3:Example parameter format.}
+ * \tparam $4 -- ${5:Example template parameter format.}
+ * \return $6 -- ${7:Example return format.}
+ * 
+ * ${0:An optional, longer, description here.}
+ */
 endsnippet

@@ -29,7 +29,7 @@ echo -e "Installing from repository: $blue$vimrc_repo_path$endf"
 
 # Check for any previous .vimrc file or symlink; archive if present.
 echo 'Checking for a previous .vimrc...'
-if [ -f $HOME/.vimrc ]; then
+if [ -f $HOME/.vimrc ] || [ -L $HOME/.vimrc ]; then
   echo -e "Archiving: $magenta$HOME/.vimrc$endf -> $green$underline$HOME/old.vimrc$endf"
   mv $HOME/.vimrc $HOME/old.vimrc
 fi
@@ -41,10 +41,10 @@ ln -s $vimrc_repo_path/.vimrc $HOME/.vimrc
 
 # Check for any previous .vim directory or symlink; archive if present.
 echo 'Checking for a previous .vim directory...'
-if [ -d $HOME/.vim ]; then
+if [ -d $HOME/.vim ] || [ -L $HOME/.vim ]; then
   echo -e "Archiving: $magenta$HOME/.vim$endf -> $green$underline$HOME/old.vim$endf"
-  rm -rf $HOME/old.vim/
-  mv $HOME/.vim/ $HOME/old.vim/
+  rm -rf $HOME/old.vim
+  mv $HOME/.vim $HOME/old.vim
 fi
 # Make a new .vim directory
 if [ ! -d $HOME/.vim ]; then
@@ -66,11 +66,6 @@ fi
 echo -e "Creating symlink: $magenta$vimrc_repo_path/Snippets$endf ->" \
         "$green$underline$HOME/.vim/Snippets$endf"
 ln -s $vimrc_repo_path/Snippets $HOME/.vim/Snippets
-
-# Link the YCM directory into the new .vim directory.
-echo -e "Creating symlink: $magenta$vimrc_repo_path/YCM$endf ->" \
-        "$green$underline$HOME/.vim/YCM$endf"
-ln -s $vimrc_repo_path/YCM $HOME/.vim/YCM
 
 # Check&Create the relevant cache folders for the user.
 echo 'Checking cache directories...'
