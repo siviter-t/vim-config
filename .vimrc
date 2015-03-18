@@ -359,28 +359,6 @@ let g:thematic#themes = {
   \},
 \}
 
-" Lazy hackery for a better airline thematic theme changeover.
-function! Better_airline_thematic_changing(theme_name)
-  if match(a:theme_name, 'default') || match(a:theme_name, 'molokai')
-    let g:airline_theme = 'ubaryd'
-    if exists(':AirlineTheme')
-      AirlineTheme ubaryd
-    endif
-  endif
-  if match(a:theme_name, 'solarized_light') || match(a:theme_name, 'solarized_dark')
-    let g:airline_theme = 'solarized'
-    if exists(':AirlineTheme')
-      AirlineTheme solarized
-    endif
-  endif
-endfunction
-
-" Set the airline theme on entering...
-augroup vim_airline_theme_set
-    autocmd!
-    autocmd VimEnter * call Better_airline_thematic_changing('g:thematic#theme_name')
-augroup END
-
 " ------------------------------- "
 " 7.3 "Code-snippets (UltiSnips)" "
 " ------------------------------- "
