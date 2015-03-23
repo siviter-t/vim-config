@@ -14,7 +14,7 @@ blue='\e[34m' # Blue text.
 magenta='\e[35m' # Magenta text.
 endf='\e[0m' # Reset formatting.
 
-vimrc_repo_path=$(cd ${0%/*} && pwd -P) # The absolute path to the repo.
+dotVim_repo_path=$(cd ${0%/*} && pwd -P) # The absolute path to the repo.
 
 # Check that Vim is accessible! Pointless otherise!
 if vim --version >/dev/null 2>&1; then
@@ -34,7 +34,7 @@ else
   exit 1
 fi
 
-echo -e "Setup from repository: $blue$vimrc_repo_path$endf"
+echo -e "Setup from repository: $blue$dotVim_repo_path$endf"
 
 # Check for the YouCompleteMe directory.
 # May fail depending on environment -- see Valloric's installation notes on GitHub if it does.

@@ -1,4 +1,4 @@
-# vimrc
+# dotVim
 ## *Personal* Vim configuration
 
 I guess I may write something meaningful here at some undetermined point in time.

@@ -14,7 +14,7 @@ blue='\e[34m' # Blue text.
 magenta='\e[35m' # Magenta text.
 endf='\e[0m' # Reset formatting.
 
-vimrc_repo_path=$(cd ${0%/*} && pwd -P) # The absolute path to the repo.
+dotVim_repo_path=$(cd ${0%/*} && pwd -P) # The absolute path to the repo.
 
 # Check that Vim is accessible! Pointless otherise!
 if vim --version >/dev/null 2>&1; then
@@ -25,19 +25,19 @@ else
   exit 1
 fi
 
-echo -e "Installing from repository: $blue$vimrc_repo_path$endf"
+echo -e "Installing from repository: $blue$dotVim_repo_path$endf"
 
-# Check for any previous .vimrc file or symlink; archive if present.
-echo 'Checking for a previous .vimrc...'
-if [ -f $HOME/.vimrc ] || [ -L $HOME/.vimrc ]; then
-  echo -e "Archiving: $magenta$HOME/.vimrc$endf -> $green$underline$HOME/old.vimrc$endf"
-  mv $HOME/.vimrc $HOME/old.vimrc
+# Check for any previous .dotVim file or symlink; archive if present.
+echo 'Checking for a previous .dotVim...'
+if [ -f $HOME/.dotVim ] || [ -L $HOME/.dotVim ]; then
+  echo -e "Archiving: $magenta$HOME/.dotVim$endf -> $green$underline$HOME/old.dotVim$endf"
+  mv $HOME/.dotVim $HOME/old.dotVim
 fi
 
-# Link the .vimrc to the user's home directory.
-echo -e "Creating symlink: $magenta$vimrc_repo_path/.vimrc$endf ->" \
-        "$green$underline$HOME/.vimrc$endf"
-ln -s $vimrc_repo_path/.vimrc $HOME/.vimrc
+# Link the .dotVim to the user's home directory.
+echo -e "Creating symlink: $magenta$dotVim_repo_path/.dotVim$endf ->" \
+        "$green$underline$HOME/.dotVim$endf"
+ln -s $dotVim_repo_path/.dotVim $HOME/.dotVim
 
 # Check for any previous .vim directory or symlink; archive if present.
 echo 'Checking for a previous .vim directory...'
@@ -63,9 +63,9 @@ if [ -d $HOME/.vim/bundle ]; then
 fi
 
 # Link the Snippets directory into the new .vim directory.
-echo -e "Creating symlink: $magenta$vimrc_repo_path/Snippets$endf ->" \
+echo -e "Creating symlink: $magenta$dotVim_repo_path/Snippets$endf ->" \
         "$green$underline$HOME/.vim/Snippets$endf"
-ln -s $vimrc_repo_path/Snippets $HOME/.vim/Snippets
+ln -s $dotVim_repo_path/Snippets $HOME/.vim/Snippets
 
 # Check&Create the relevant cache folders for the user.
 echo 'Checking cache directories...'
