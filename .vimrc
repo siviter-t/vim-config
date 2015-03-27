@@ -235,11 +235,10 @@ let g:load_doxygen_syntax=1
 " let g:doxygen_enhanced_colour=1
 
 " Customised CXX Metatypes.
-let custom_cpp_types=" string_t fun_t int_t real_t complex_t index_t vec_t table_t".
-                   \ " colVec_t rowVec_t matrix_t triad_t tetrad_t tensor_t".
-                   \ " colVec_ft rowVec_ft matrix_ft triad_ft tetrad_ft tensor_ft".
-                   \ " colVec_it rowVec_it matrix_it triad_it tetrad_it tensor_it".
-                   \ " resource_t resptr_t"
+let custom_cpp_types=" integer_t int_t real_t flt_t complex_t cplx_t index_t idx_t".
+                   \ " string_t str_t vector_t vec_t table_t tab_t function_t fun_t".
+                   \ " ptr_t uptr_t sptr_t wptr_t resource_t res_t resouceptr_t resptr_t".
+                   \ " colVec_t rowVec_t matrix_t triad_t tetrad_t tensor_t"
 
 " Application of any customised CXX syntax.
 augroup custom_cpp_syntax
