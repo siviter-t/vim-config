@@ -27,17 +27,17 @@ fi
 
 echo -e "Installing from repository: $blue$dotVim_repo_path$endf"
 
-# Check for any previous .dotVim file or symlink; archive if present.
-echo 'Checking for a previous .dotVim...'
-if [ -f $HOME/.dotVim ] || [ -L $HOME/.dotVim ]; then
-  echo -e "Archiving: $magenta$HOME/.dotVim$endf -> $green$underline$HOME/old.dotVim$endf"
-  mv $HOME/.dotVim $HOME/old.dotVim
+# Check for any previous .vimrc file or symlink; archive if present.
+echo 'Checking for a previous .vimrc...'
+if [ -f $HOME/.vimrc ] || [ -L $HOME/.vimrc ]; then
+  echo -e "Archiving: $magenta$HOME/.vimrc$endf -> $green$underline$HOME/old.vimrc$endf"
+  mv $HOME/.vimrc $HOME/old.vimrc
 fi
 
-# Link the .dotVim to the user's home directory.
-echo -e "Creating symlink: $magenta$dotVim_repo_path/.dotVim$endf ->" \
-        "$green$underline$HOME/.dotVim$endf"
-ln -s $dotVim_repo_path/.dotVim $HOME/.dotVim
+# Link the .vimrc to the user's home directory.
+echo -e "Creating symlink: $magenta$dotVim_repo_path/.vimrc$endf ->" \
+        "$green$underline$HOME/.vimrc$endf"
+ln -s $dotVim_repo_path/.vimrc $HOME/.vimrc
 
 # Check for any previous .vim directory or symlink; archive if present.
 echo 'Checking for a previous .vim directory...'
