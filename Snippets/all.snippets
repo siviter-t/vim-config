@@ -10,11 +10,11 @@
 # 1.1 "File Information" #
 # ---------------------- #
 
-snippet _filename "Name of the current file"
+snippet _filename "Name of the current file" i
 `!p snip.rv=vim.eval("expand('%:t:r')")`
 endsnippet
 
-snippet _fileext "Extension of the current file"
+snippet _fileext "Extension of the current file" i
 `!p snip.rv=vim.eval("expand('%:t:e')")`
 endsnippet
 
@@ -22,18 +22,18 @@ endsnippet
 # 1.2 "Time and Dates" #
 # -------------------- #
 
-snippet _time "The current time"
+snippet _time "The current time" i
 `date +%T`
 endsnippet
 
-snippet _date "Today's date with format: 'yyyy-mm-dd'"
+snippet _date "Today's date with format: 'yyyy-mm-dd'" i
 `date +%F`
 endsnippet
 
-snippet _fulldate "Today's date with format: 'dd/mm/yyyy'"
+snippet _fulldate "Today's date with format: 'dd/mm/yyyy'" i
 `date +%d/%m/%Y`
 endsnippet
 
-snippet _monthdate "Today's date with format: 'Month yyyy'"
+snippet _monthdate "Today's date with format: 'Month yyyy'" i
 `date +%B" "%Y`
 endsnippet
