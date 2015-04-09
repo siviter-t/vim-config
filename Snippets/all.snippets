@@ -6,10 +6,34 @@
 # not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 # -------------------------------------------------------------------------------------------- #
 
-snippet today "Print out today's date -- 'dd/mm/yyyy' format."
+# ---------------------- #
+# 1.1 "File Information" #
+# ---------------------- #
+
+snippet _filename "Name of the current file"
+`!p snip.rv=vim.eval("expand('%:t:r')")`
+endsnippet
+
+snippet _fileext "Extension of the current file"
+`!p snip.rv=vim.eval("expand('%:t:e')")`
+endsnippet
+
+# -------------------- #
+# 1.2 "Time and Dates" #
+# -------------------- #
+
+snippet _time "The current time"
+`date +%T`
+endsnippet
+
+snippet _date "Today's date with format: 'yyyy-mm-dd'"
+`date +%F`
+endsnippet
+
+snippet _fulldate "Today's date with format: 'dd/mm/yyyy'"
 `date +%d/%m/%Y`
 endsnippet
 
-snippet today "Print out today's date -- 'Month yyyy' format."
+snippet _monthdate "Today's date with format: 'Month yyyy'"
 `date +%B" "%Y`
 endsnippet
