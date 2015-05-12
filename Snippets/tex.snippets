@@ -1,0 +1,29 @@
+# \file tex.snippets
+# \author Taylor Siviter
+# \date May 2015
+# \copyright Mozilla Public License, Version 2.0.
+# This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+# not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+# -------------------------------------------------------------------------------------------- #
+
+# ------------------------------ #
+# 1.0 "Introductory Boilerplate" #
+# ------------------------------ #
+
+snippet _header "File heading information" bt
+% File: `!p snip.rv = fn`
+% Author: Taylor Siviter
+% Date: `date +%B" "%Y`
+% Brief: ${1:Insert a brief description.}
+% -------------------------------------------------------------------------------------------- 
+
+$0
+endsnippet
+
+# ------------------- #
+# 2.0 "Documentation" #
+# ------------------- #
+
+snippet %< "Right-aligned doxygen comments (Column #64)"
+`!p snip.rv = (64-int(vim.eval("virtcol('.')")))*' '+'%< '+t[0]`
+endsnippet
