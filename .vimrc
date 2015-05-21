@@ -171,10 +171,7 @@ inoremap <C-w> <C-g>u<C-w>
 vnoremap <Leader>x "+d<ESC>
 vnoremap <C-c> "+y<ESC>
 nnoremap <C-v> <ESC>"+p
-inoremap <C-v> <C-O>"+pfected. Uses the familiar "Leader-X",
-" "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard, this
-" requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
-" 
+inoremap <C-v> <C-O>"+p
 vnoremap <C-v> "+p<ESC>
 
 " --------------------- "
