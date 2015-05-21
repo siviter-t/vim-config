@@ -11,11 +11,14 @@
 # ------------------------------ #
 
 snippet _header "File heading information" bt
-% File: `!p snip.rv = fn`
-% Author: Taylor Siviter
-% Date: `date +%B" "%Y`
-% Brief: ${1:Insert a brief description.}
-% -------------------------------------------------------------------------------------------- 
+" File: `!p snip.rv = fn`
+" Author: Taylor Siviter
+" Date: `date +%B" "%Y`
+" Brief: ${1:Insert a brief description.}
+" Copyright: Mozilla Public License, Version 2.0.
+" This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
+" not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+" -------------------------------------------------------------------------------------------- "
 
 $0
 endsnippet
@@ -24,6 +27,6 @@ endsnippet
 # 2.0 "Documentation" #
 # ------------------- #
 
-snippet %< "Right-aligned comments (Column #64)"
-`!p snip.rv = (64-int(vim.eval("virtcol('.')")))*' '+'%< '+t[0]`
+snippet "< "Right-aligned comments (Column #64)"
+`!p snip.rv = (64-int(vim.eval("virtcol('.')")))*' '+'"< '+t[0]`
 endsnippet
