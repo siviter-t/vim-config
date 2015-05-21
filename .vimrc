@@ -1,7 +1,7 @@
 " File: .vimrc
 " Author: Taylor Siviter
-" Date: March 2015
-" Brief: Personal Vim Configuration.
+" Date: May 2015
+" Brief: Personal Vim Configuration
 " Copyright: Mozilla Public License, Version 2.0.
 " This Source Code Form is subject to the terms of the MPL, v. 2.0. If a copy of the MPL was
 " not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -24,41 +24,42 @@ augroup END
 " ----------------------------- "
 " See: https://github.com/gmarik/Vundle.vim
 
-set nocompatible " Reset distribution clutter and any options set.
-filetype off " Temporarily turn off filetype detection.
-set rtp+=~/.vim/bundle/Vundle.vim " Runtime path to Vundle.
-call vundle#begin() " Start Vundle management shenanigans.
+set nocompatible                                               "< Reset distribution clutter
+filetype off                                                   "< Turn off filetype detection
+set rtp+=~/.vim/bundle/Vundle.vim                              "< Add runtime path to Vundle
+call vundle#begin()                                            "< Start Vundle shenanigans
 
-Plugin 'gmarik/Vundle.vim' " Vundle plug-in mangager.
-Plugin 'kien/ctrlp.vim' " File/etc finder.
-Plugin 'SirVer/ultisnips' " Code snippets.
-Plugin 'Valloric/YouCompleteMe' " Code-completion.
-Plugin 'tomtom/tcomment_vim' " Comment toggler.
-Plugin 'tpope/vim-fugitive' " Git wrapper.
-Plugin 'airblade/vim-gitgutter' " Git diffs linenumbers.
-Plugin 'xolox/vim-misc' " Misc functions for xolox Vim plugins.
-Plugin 'xolox/vim-easytags' " Automated tag generation and syntax highlighting.
-Plugin 'majutsushi/tagbar' " Tagbar for a file
-Plugin 'bling/vim-airline' " Status/tabline bar.
-Plugin 'reedes/vim-thematic' " Theme control.
-Plugin 'tomasr/molokai' " Molokai colourscheme.
-Plugin 'altercation/vim-colors-solarized' " Solarized colourscheme.
-Plugin 'octol/vim-cpp-enhanced-highlight' " Additional CXX highlighting.
+Plugin 'gmarik/Vundle.vim'                                     "< Vundle plug-in mangager
+Plugin 'kien/ctrlp.vim'                                        "< File/etc finder
+Plugin 'SirVer/ultisnips'                                      "< Code snippets
+Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
+Plugin 'tomtom/tcomment_vim'                                   "< Comment toggler
+Plugin 'tpope/vim-fugitive'                                    "< Git wrapper
+Plugin 'tpope/vim-speeddating'                                 "< Clever date incrementing
+Plugin 'airblade/vim-gitgutter'                                "< Git diffs linenumbers
+Plugin 'xolox/vim-misc'                                        "< Misc functions for xolox
+Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
+Plugin 'majutsushi/tagbar'                                     "< Tagbar for a file
+Plugin 'bling/vim-airline'                                     "< Status/tabline bar
+Plugin 'reedes/vim-thematic'                                   "< Theme control
+Plugin 'tomasr/molokai'                                        "< Molokai colourscheme
+Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
+Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
 
-call vundle#end() " End Plugin management.
+call vundle#end()                                              "< End Vundle management
 
 " ---------------------------- "
 " 1.2 "Personal Introductions" "
 " ---------------------------- "
 
-let _vim_path=$HOME.'/.vim' " Path to the .vim directory.
-let _vim_cache_path=$HOME.'/.cache/vim' " Path to the cache folder for Vim.
-let _vim_line_char_limit=96 " Define the character limit per line.
-let mapleader=' ' " Setting the Leader keyboard expansion.
+let _vim_path=$HOME.'/.vim'                                    "< Path to the .vim directory
+let _vim_cache_path=$HOME.'/.cache/vim'                        "< Path to the cache dir
+let _vim_line_char_limit=96                                    "< Character limit per line
+let mapleader=' '                                              "< Leader key expansion
 
 " Ignore the following places or files in wildcard expansion.
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
-let g:netrw_home=_vim_cache_path " Change the location to save netrw cache.
+let g:netrw_home=_vim_cache_path                               "< Change netrw cache dir
 
 " ------------------------ "
 " 1.3 "De Facto Standards" "
@@ -161,16 +162,19 @@ inoremap <C-w> <C-g>u<C-w>
 " 3.1 "A Familiar Cut, Copy, and Paste" "
 " ------------------------------------- "
 " Allows more natural cut/copy/paste actions; and allows use of the system clipboard -- the
-" "d", "y", and "p" shortcuts remain independent and unaffected. Uses the more common shortcuts
-" "Ctrl-X", "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard,
-" this requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
+" "d", "y", and "p" shortcuts remain independent and unaffected. Uses the familiar "Leader-X",
+" "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard, this
+" requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
 " OSX/Windows, the "* register should be used instead. While either/or registers may work, this
 " option is unfortunately particularly system specific.
 
-vnoremap <C-x> "+d<ESC>
+vnoremap <Leader>x "+d<ESC>
 vnoremap <C-c> "+y<ESC>
 nnoremap <C-v> <ESC>"+p
-inoremap <C-v> <C-O>"+p
+inoremap <C-v> <C-O>"+pfected. Uses the familiar "Leader-X",
+" "Ctrl-C", and "Ctrl-V"; coupled with the "+ register -- alias to the X11 clipboard, this
+" requires the feature +xterm_clipboard to be compiled with Vim. For non-X11 systems, like
+" 
 vnoremap <C-v> "+p<ESC>
 
 " --------------------- "
@@ -219,6 +223,17 @@ set ignorecase smartcase " Case insensitive searching; except when using capital
 
 " Clear any highlighted search results.
 nnoremap <silent> <CR> :let @/="" <CR>
+
+" -------------------- "
+" 3.5 "Spell checking" "
+" -------------------- "
+" Use "F7" to toggle spell check; for a list of suggestions, move to the misspelled word and
+" use "Leader-z" or "z=".
+
+set spelllang=en_gb                                            "< British English
+noremap <F7> :setlocal spell!<CR>
+inoremap <F7> <C-O>:setlocal spell!<CR>
+noremap <Leader>z z=
 
 " -------------------------------- "
 " 4.0 "Programming-specific Magic" "
