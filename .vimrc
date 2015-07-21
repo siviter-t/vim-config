@@ -32,7 +32,6 @@ call vundle#begin()                                            "< Start Vundle s
 Plugin 'gmarik/Vundle.vim'                                     "< Vundle plug-in mangager
 Plugin 'kien/ctrlp.vim'                                        "< File/etc finder
 Plugin 'SirVer/ultisnips'                                      "< Code snippets
-Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
 Plugin 'tomtom/tcomment_vim'                                   "< Comment toggler
 Plugin 'tpope/vim-fugitive'                                    "< Git wrapper
 Plugin 'tpope/vim-speeddating'                                 "< Clever date incrementing
@@ -45,6 +44,7 @@ Plugin 'reedes/vim-thematic'                                   "< Theme control
 Plugin 'tomasr/molokai'                                        "< Molokai colourscheme
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
+Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
 
 call vundle#end()                                              "< End Vundle management
 
