@@ -60,6 +60,8 @@ let mapleader=' '                                              "< Leader key exp
 " Ignore the following places or files in wildcard expansion.
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/build/*,*/bin/*,*/doc/*,*/lib/*
 let g:netrw_home=_vim_cache_path                               "< Change netrw cache dir
+" Customise and move viminfo to cache.
+let &viminfo = "f1,'100,:250,/250,<1000,s100,h,n"._vim_cache_path.'/viminfo'
 
 " ------------------------ "
 " 1.3 "De Facto Standards" "
