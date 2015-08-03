@@ -1,0 +1,11 @@
+[Desktop Entry]
+Categories=Development;System;
+Comment=A (vi)ery useful text editor
+Exec=urxvt -e vim %F
+Icon=text-xml
+MimeType=text
+Name=vim
+NoDisplay=false
+Terminal=0
+TerminalOptions=
+Type=Application
