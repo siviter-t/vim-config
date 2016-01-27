@@ -40,7 +40,6 @@ Plugin 'xolox/vim-misc'                                        "< Misc functions
 Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
 Plugin 'majutsushi/tagbar'                                     "< Tagbar for a file
 Plugin 'bling/vim-airline'                                     "< Status/tabline bar
-Plugin 'reedes/vim-thematic'                                   "< Theme control
 Plugin 'tomasr/molokai'                                        "< Molokai colourscheme
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
@@ -336,41 +335,16 @@ augroup vim_airline_config
     autocmd VimEnter * call AirlineConfig()
 augroup END
 
-" --------------------------------------------- "
-" 7.2 "Colourschemes -> Themes! (vim-thematic)" "
-" --------------------------------------------- "
-" Allows on-the-fly Vim theming using Vim's command-line. Use ":Thematic <theme>" to load the
-" theme named within the angular brackets. Alternatively, use the other Thematic commands, such
-" as ":ThematicNext", ":ThematicRandom", etc -- see the autocompletion at the command-line.
-" See: https://github.com/reedes/vim-thematic
+" ------------------- "
+" 7.2 "Colourschemes" "
+" ------------------- "
+" To be customised ad hoc when required.
 
-let g:rehash256 = 1 " Molokai 256 colour terminal.
-let g:solarized_termcolors = 256 " Solarized 256 colour terminal.
-let g:thematic#theme_name = 'molokai' " Set the default theme to open.
+set background=dark
+colorscheme solarized
 
-" Available themes.
-let g:thematic#themes = {
-  \'default' :{
-    \'colorscheme': 'industry',
-    \'background': 'dark',
-    \'airline-theme': 'ubaryd',
-  \},
-  \'molokai' :{
-    \'colorscheme': 'molokai',
-    \'background': 'dark',
-    \'airline_theme': 'ubaryd',
-  \},
-  \'solarized_light' :{
-    \'colorscheme': 'solarized',
-    \'background': 'light',
-    \'airline_theme': 'solarized',
-  \},
-  \'solarized_dark' :{
-    \'colorscheme': 'solarized',
-    \'background': 'dark',
-    \'airline_theme': 'solarized',
-  \},
-\}
+"let g:rehash256 = 1 " Molokai 256 colour terminal.
+"let g:solarized_termcolors = 256 " Degraded Solarized 256 colour terminal.
 
 " ------------------------------- "
 " 7.3 "Code-snippets (UltiSnips)" "

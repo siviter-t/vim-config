@@ -42,7 +42,7 @@ echo 'Finding the YouCompleteMe plugin...'
 if [ -d $HOME/.vim/bundle/YouCompleteMe ]; then
   echo -e "Installing: $green$underline"YouCompleteMe"$endf"
   cd $HOME/.vim/bundle/YouCompleteMe
-  ./install.sh 
+  ./install.py 
 fi
 
 # Fin.
