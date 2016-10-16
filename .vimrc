@@ -39,7 +39,8 @@ Plugin 'airblade/vim-gitgutter'                                "< Git diffs line
 Plugin 'xolox/vim-misc'                                        "< Misc functions for xolox
 Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
 Plugin 'majutsushi/tagbar'                                     "< Tagbar for a file
-Plugin 'bling/vim-airline'                                     "< Status/tabline bar
+Plugin 'vim-airline/vim-airline'                               "< Status/tabline bar
+Plugin 'vim-airline/vim-airline-themes'                        "< Themes for the bar
 Plugin 'tomasr/molokai'                                        "< Molokai colourscheme
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
@@ -75,6 +76,7 @@ set notimeout ttimeout ttimeoutlen=200 " Time out on keycodes; but do not for ke
 set complete-=i " Remove any included files from autocompletion -- tags are better.
 set autoread " Reread files that have been changed outside of Vim.
 set fileformats=unix,dos,mac " Set the likely fileformats for EOL character reading.
+set encoding=utf-8
 
 " Enable mouse interactions -- if supported.
 if has('mouse')
@@ -112,7 +114,7 @@ let &colorcolumn=_vim_line_char_limit " Enable highlighting of the character lim
 " 2.2 "Tabs for Buffers" "
 " ---------------------- "
 " Use "Ctrl-T" to open a new tab; and "Ctrl-Y" to close it. To swap to the previous tab, use
-" "Ctrl-PageUp"; conversely, use "Ctrl-PageDown" to change to the next open tab. If there is no
+" "Leader-Left"; conversely, use "Leader-Right" to change to the next open tab. If there is no
 " adjacent tab open in the direction desired, Vim will loop back to the first or last tab.
 " Additionally, the shortcut "Leader-#", where # is a number between 1 and 9, can be used to
 " quickly swap to the respective tab. To view any open buffers as tabs, use "Leader-t".
@@ -134,9 +136,8 @@ vnoremap <silent><C-Y> <Esc>:tabclose<CR>v
 " Open all buffers as tabs (Max=9).
 nnoremap <silent><Leader>t :ec "No available buffers to tab"<CR>:tab 9sball<CR>
 
-" If in visual mode, reselect it on tab movement.
-vnoremap <silent><C-PageUp> <Esc>:tabprevious<CR>v
-vnoremap <silent><C-PageDown> <Esc>:tabnext<CR>v
+nnoremap <silent><Leader><Left> <Esc>:tabprevious<CR>
+nnoremap <silent><Leader><Right> <Esc>:tabnext<CR>
 
 " Swap to the respectively numbered tab.
 noremap <silent><Leader>1 <ESC>1gt
@@ -311,13 +312,13 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " Available Powerline symbols -- for reference.
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
+" let g:airline_left_sep = ''
+" let g:airline_left_alt_sep = ''
+" let g:airline_right_sep = ''
+" let g:airline_right_alt_sep = ''
+" let g:airline_symbols.branch = ''
+" let g:airline_symbols.readonly = ''
+" let g:airline_symbols.linenr = ''
 
 " Airline statusbar configuration.
 function! AirlineConfig()
@@ -325,7 +326,8 @@ function! AirlineConfig()
   let g:airline_section_b = airline#section#create_left(['%f','filetype']) " File
   let g:airline_section_c = airline#section#create(['hunks']) " Git Hunks
   let g:airline_section_x = airline#section#create(['%P']) " Percentage
-  let g:airline_section_y = airline#section#create(['%{bufnr("%")}B']) " Buffer
+  " let g:airline_section_y = airline#section#create(['%{bufnr("%")}B']) " Buffer
+  let g:airline_section_y = airline#section#create(['']) " Buffer
   let g:airline_section_z = airline#section#create_right(['%cC','%l']) " Line >> Character
 endfunction
 
@@ -334,6 +336,20 @@ augroup vim_airline_config
     autocmd!
     autocmd VimEnter * call AirlineConfig()
 augroup END
+
+" Fixing UI glitches
+function! RefreshUI()
+  if exists(':AirlineRefresh')
+    AirlineRefresh
+  else
+    " Clear & redraw the screen, then redraw all statuslines.
+    redraw!
+    redrawstatus!
+  endif
+endfunction
+
+au BufWritePost .vimrc source $MYVIMRC | :call RefreshUI()
+au VimEnter * call RefreshUI()
 
 " ------------------- "
 " 7.2 "Colourschemes" "
