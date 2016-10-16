@@ -404,6 +404,7 @@ nnoremap <F8> :TagbarToggle<CR>
 " See: https://github.com/tomtom/tcomment_vim
 
 noremap <Leader>d :TComment<CR>
+call tcomment#DefineType('idlang', ';%s') " IDL comments
 
 " ---------------------------------------- "
 " 7.7 "Git Git Git (fugitive & gitgutter)" "
