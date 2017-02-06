@@ -37,7 +37,7 @@ Plugin 'tpope/vim-fugitive'                                    "< Git wrapper
 Plugin 'tpope/vim-speeddating'                                 "< Clever date incrementing
 Plugin 'airblade/vim-gitgutter'                                "< Git diffs linenumbers
 Plugin 'xolox/vim-misc'                                        "< Misc functions for xolox
-Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
+" Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
 Plugin 'majutsushi/tagbar'                                     "< Tagbar for a file
 Plugin 'vim-airline/vim-airline'                               "< Status/tabline bar
 Plugin 'vim-airline/vim-airline-themes'                        "< Themes for the bar
@@ -94,7 +94,19 @@ set showcmd " Show partial commands on the last line of the screen.
 set noshowmode " Do not output the current mode to the last line -- a status bar job.
 set showtabline=2 " Force the tabline.
 set laststatus=2 " Force the display of the status bar at the bottom.
-syntax on " Force syntax highlighting.
+syntax enable " Turn syntax highlighting on.
+
+" ------------------- "
+" 7.2 "Colourschemes" "
+" ------------------- "
+" To be customised ad hoc when required.
+
+" let g:solarized_termcolors = 256 " Degraded scheme for unsolarized terminals! See below
+let &t_Co=256                    " Try tweaking these options for different terminals!
+let g:solarized_termtrans=1      " ^- See above  
+
+set background=dark
+colorscheme solarized
 
 " --------------------- "
 " 2.1 "Lines & Columns" "
@@ -350,17 +362,6 @@ endfunction
 
 au BufWritePost .vimrc source $MYVIMRC | :call RefreshUI()
 au VimEnter * call RefreshUI()
-
-" ------------------- "
-" 7.2 "Colourschemes" "
-" ------------------- "
-" To be customised ad hoc when required.
-
-set background=dark
-colorscheme solarized
-
-"let g:rehash256 = 1 " Molokai 256 colour terminal.
-"let g:solarized_termcolors = 256 " Degraded Solarized 256 colour terminal.
 
 " ------------------------------- "
 " 7.3 "Code-snippets (UltiSnips)" "
