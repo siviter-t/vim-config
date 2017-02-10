@@ -45,6 +45,7 @@ Plugin 'tomasr/molokai'                                        "< Molokai colour
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
 Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
+Plugin 'kchmck/vim-coffee-script'                              "< CoffeeScript highlighting
 
 call vundle#end()                                              "< End Vundle management
 
@@ -238,12 +239,12 @@ nnoremap <silent> <CR> :let @/="" <CR>
 " -------------------- "
 " 3.5 "Spell checking" "
 " -------------------- "
-" Use "F7" to toggle spell check; for a list of suggestions, move to the misspelled word and
+" Use "F" to toggle spell check; for a list of suggestions, move to the misspelled word and
 " use "Leader-z" or "z=".
 
 set spelllang=en_gb                                            "< British English
-noremap <F7> :setlocal spell!<CR>
-inoremap <F7> <C-O>:setlocal spell!<CR>
+noremap <Leader>s :setlocal spell!<CR>
+" inoremap <Leader>s <C-O>:setlocal spell!<CR>
 noremap <Leader>z z=
 
 " -------------------------------- "
