@@ -183,11 +183,10 @@ inoremap <C-w> <C-g>u<C-w>
 " OSX/Windows, the "* register should be used instead. While either/or registers may work, this
 " option is unfortunately particularly system specific.
 
-vnoremap <Leader>x "+d<ESC>
-vnoremap <C-c> "+y<ESC>
-nnoremap <C-v> <ESC>"+p
-inoremap <C-v> <C-O>"+p
-vnoremap <C-v> "+p<ESC>
+vmap <Leader>x "+c
+vmap <C-c> "+yi<ESC>
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 
 " --------------------- "
 " 3.2 "Familiar Saving" "
