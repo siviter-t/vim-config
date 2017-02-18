@@ -46,6 +46,9 @@ Plugin 'altercation/vim-colors-solarized'                      "< Solarized colo
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
 Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
 Plugin 'kchmck/vim-coffee-script'                              "< CoffeeScript highlighting
+Plugin 'scrooloose/nerdtree'                              "< CoffeeScript highlighting
+Plugin 'jistr/vim-nerdtree-tabs'                              "< CoffeeScript highlighting
+Plugin 'Xuyuanp/nerdtree-git-plugin'                              "< CoffeeScript highlighting
 
 call vundle#end()                                              "< End Vundle management
 
@@ -414,3 +417,13 @@ call tcomment#DefineType('idlang', ';%s') " IDL comments
 " See: https://github.com/airblade/vim-gitgutter
 
 noremap  <Leader>g :GitGutterToggle<CR>
+
+" ------------------------------- "
+" 7.8 "Project Drawer (NERDTree)" "
+" ------------------------------- "
+" Yes, not netrw... But it does simulate the experience in other editors in a nice
+" visual way. Use <C-n> to toggle the drawer.
+
+let g:nerdtree_tabs_open_on_console_startup=2
+map <C-n> <plug>NERDTreeTabsToggle<CR>
+
