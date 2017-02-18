@@ -31,24 +31,23 @@ call vundle#begin()                                            "< Start Vundle s
 
 Plugin 'gmarik/Vundle.vim'                                     "< Vundle plug-in mangager
 Plugin 'kien/ctrlp.vim'                                        "< File/etc finder
-Plugin 'SirVer/ultisnips'                                      "< Code snippets
+Plugin 'scrooloose/nerdtree'                                   "< Project drawer
+Plugin 'jistr/vim-nerdtree-tabs'                               "< Better drawer tabs
+Plugin 'Xuyuanp/nerdtree-git-plugin'                           "< Git project drawer
 Plugin 'tomtom/tcomment_vim'                                   "< Comment toggler
 Plugin 'tpope/vim-fugitive'                                    "< Git wrapper
 Plugin 'tpope/vim-speeddating'                                 "< Clever date incrementing
 Plugin 'airblade/vim-gitgutter'                                "< Git diffs linenumbers
 Plugin 'xolox/vim-misc'                                        "< Misc functions for xolox
-" Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
 Plugin 'majutsushi/tagbar'                                     "< Tagbar for a file
 Plugin 'vim-airline/vim-airline'                               "< Status/tabline bar
 Plugin 'vim-airline/vim-airline-themes'                        "< Themes for the bar
-Plugin 'tomasr/molokai'                                        "< Molokai colourscheme
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
-Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
 Plugin 'kchmck/vim-coffee-script'                              "< CoffeeScript highlighting
-Plugin 'scrooloose/nerdtree'                              "< CoffeeScript highlighting
-Plugin 'jistr/vim-nerdtree-tabs'                              "< CoffeeScript highlighting
-Plugin 'Xuyuanp/nerdtree-git-plugin'                              "< CoffeeScript highlighting
+Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
+" Plugin 'SirVer/ultisnips'                                      "< Code snippets
+" Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
 
 call vundle#end()                                              "< End Vundle management
 
