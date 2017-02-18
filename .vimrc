@@ -149,7 +149,11 @@ inoremap <silent><C-Y> <Esc>:tabclose<CR>i
 vnoremap <silent><C-Y> <Esc>:tabclose<CR>v
 
 " Open all buffers as tabs (Max=9).
-nnoremap <silent><Leader>t :ec "No available buffers to tab"<CR>:tab 9sball<CR>
+" nnoremap <silent><Leader>t :ec "No available buffers to tab"<CR>:tab 9sball<CR>
+" au VimEnter,BufNewFile,BufRead * nested
+  " \ if &buftype != "help" |
+  " \   tab sball |
+  " \ endif
 
 nnoremap <silent><Leader><Left> <Esc>:tabprevious<CR>
 nnoremap <silent><Leader><Right> <Esc>:tabnext<CR>
@@ -397,7 +401,7 @@ let g:easytags_by_filetype = _vim_cache_path.'/tags/' " Location of filetype spe
 let g:easytags_resolve_links = 1 " Resolve symbolic links.
 
 " Tagbar Toggle
-nnoremap <F8> :TagbarToggle<CR>
+nnoremap <Leader>t :TagbarToggle<CR>
 
 " --------------- "
 " 7.6 "Comments!" "
