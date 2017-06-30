@@ -45,6 +45,7 @@ Plugin 'vim-airline/vim-airline-themes'                        "< Themes for the
 Plugin 'altercation/vim-colors-solarized'                      "< Solarized colourscheme
 Plugin 'octol/vim-cpp-enhanced-highlight'                      "< Additional CXX highlighting
 Plugin 'kchmck/vim-coffee-script'                              "< CoffeeScript highlighting
+Plugin 'tikhomirov/vim-glsl'                                   "< GLSL highlighting
 Plugin 'Valloric/YouCompleteMe'                                "< Code-completion
 " Plugin 'SirVer/ultisnips'                                      "< Code snippets
 " Plugin 'xolox/vim-easytags'                                    "< Tag and syntax generation
